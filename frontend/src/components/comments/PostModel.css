@@ -1,0 +1,275 @@
+/* =========================
+   Theme tokens
+   ========================= */
+:root {
+  --bg-overlay: rgba(4, 10, 28, 0.72);
+  --panel: #0f172a;           /* main panel */
+  --panel-2: #111c38;         /* media side */
+  --panel-3: #1a2648;         /* comments side */
+  --text: #e6eaf7;
+  --muted: #aab3cf;
+  --sep: rgba(255,255,255,0.08);
+  --brand: #7aa2ff;
+  --danger: #ef4444;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  --radius: 14px;
+}
+
+/* Smooth scroll for internal lists */
+html { scroll-behavior: smooth; }
+
+/* =========================
+   Overlay
+   ========================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overscroll-behavior: contain;
+  animation: modal-fade-in 180ms ease-out;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =========================
+   Container (two columns)
+   ========================= */
+.modal-content {
+  display: flex;
+  width: 82vw;
+  max-width: 1080px;
+  height: 82vh;
+  background: linear-gradient(180deg, #0f172a 0%, #0c1326 100%);
+  border-radius: var(--radius);
+  border: 1px solid var(--sep);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow);
+  transform: translateZ(0);
+  animation: modal-zoom-in 180ms ease-out;
+}
+
+@keyframes modal-zoom-in {
+  from { transform: scale(0.98); }
+  to   { transform: scale(1); }
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.modal-close:hover { background: rgba(255,255,255,0.06); }
+.modal-close:active { transform: scale(0.98); }
+
+/* =========================
+   Left: Media
+   ========================= */
+.modal-left {
+  flex: 1 1 55%;
+  background: radial-gradient(1200px 800px at 30% 30%, #18244b 0%, #101a36 40%, #0d152e 100%),
+              var(--panel-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0b122b;
+}
+
+/* Optional fallback if no image */
+.modal-fallback {
+  width: 100%;
+  color: var(--text);
+  padding: 24px;
+}
+
+/* =========================
+   Right: Header + Comments
+   ========================= */
+.modal-right {
+  flex: 1 1 45%;
+  min-width: 320px;
+  background: var(--panel-3);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--sep);
+  overflow: hidden; /* we make the inner comments container scroll */
+}
+
+/* Post header/info */
+.modal-post-info {
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--sep);
+}
+.modal-post-info .post-title {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  color: var(--text);
+}
+.modal-post-info .post-caption {
+  margin: 0 0 8px 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.modal-post-likes {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================
+   Comments container
+   ========================= */
+/* Make the entire comments section the scroll container so sticky works reliably */
+.modal-right .comments-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 20px 18px 20px;
+  scrollbar-gutter: stable both-edges; /* avoid layout shift when scrollbars appear */
+}
+
+/* List scrolls; items style */
+.comments-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px; /* breathing room above sticky form */
+}
+
+.comment-item {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5;
+}
+.comment-item:hover {
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.comment-author {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* Composer: sticky at the bottom of the scroll container */
+.comment-form {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  margin-top: 6px;
+  background:
+    linear-gradient(180deg, rgba(26,38,72,0.0) 0%, rgba(26,38,72,0.65) 65%, #1a2648 100%),
+    var(--panel-3);
+  border-top: 1px solid var(--sep);
+  box-shadow: 0 -6px 12px rgba(0,0,0,0.15);
+}
+
+.comment-form input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0f1a36;
+  color: var(--text);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.comment-form input[type="text"]::placeholder { color: #8e98b6; }
+.comment-form input[type="text"]:focus {
+  border-color: rgba(122,162,255,0.7);
+  box-shadow: 0 0 0 3px rgba(122,162,255,0.15);
+}
+
+.comment-form button[type="submit"] {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(122,162,255,0.35);
+  background: linear-gradient(180deg, rgba(122,162,255,0.18) 0%, rgba(122,162,255,0.28) 100%);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease, background 120ms ease;
+}
+.comment-form button[type="submit"]:hover { filter: brightness(1.1); }
+.comment-form button[type="submit"]:active { transform: translateY(1px); }
+
+/* =========================
+   Scrollbar styling (standards + WebKit fallback)
+   ========================= */
+@supports (scrollbar-color: auto) {
+  .modal-right .comments-section {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(122,162,255,0.6) rgba(15,23,42,0.8);
+  }
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .modal-right .comments-section::-webkit-scrollbar { width: 10px; }
+  .modal-right .comments-section::-webkit-scrollbar-track {
+    background: rgba(15,23,42,0.8);
+    border-radius: 10px;
+  }
+  .modal-right .comments-section::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(122,162,255,0.4), rgba(122,162,255,0.7));
+    border-radius: 10px;
+    border: 2px solid rgba(15,23,42,0.8);
+  }
+  .modal-right .comments-section::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(122,162,255,0.55), rgba(122,162,255,0.85));
+  }
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 900px) {
+  .modal-content {
+    width: 94vw;
+    height: 90vh;
+    flex-direction: column;
+  }
+  .modal-left { min-height: 45vh; }
+  .modal-right { min-height: 45vh; min-width: 0; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay, .modal-content, .modal-close,
+  .comment-form button[type="submit"], .comment-form input[type="text"] {
+    transition: none !important;
+    animation: none !important;
+  }
+}

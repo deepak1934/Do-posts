@@ -1,0 +1,56 @@
+/* Default Dark Theme */
+:root {
+  --bg: #0d1b2a;
+  --card-bg: #1b263b;
+  --text: #e6eef4;
+  --muted: #a0a6b0;
+  --border: #2f3e56;
+  --primary: #4fa3f7;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Gray / Light Theme */
+body.gray-theme {
+  --bg: #f0f0f0;
+  --card-bg: #ffffff;
+  --text: #222222;
+  --muted: #555555;
+  --border: #ddd;
+  --primary: #0079d3;
+  --card-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Red / Warm Theme */
+body.red-theme {
+  --bg: #ffebe6;
+  --card-bg: #ffd9d0;
+  --text: #4a0000;
+  --muted: #772222;
+  --border: #ff9990;
+  --primary: #ff3333;
+  --card-shadow: 0 4px 12px rgba(119,0,0,0.3);
+}
+
+/* Global styling */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100%;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* For cards, sidebar, etc. use CSS variables */
+.post-card, .sidebar, .navbar {
+  background-color: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+/* Add padding so content doesn't hide under navbar */
+.main-content {
+  padding-top: 70px; /* adjust if navbar is taller */
+}

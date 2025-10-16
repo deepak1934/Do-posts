@@ -1,0 +1,144 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* allows items to wrap */
+  background-color: var(--card-bg);
+  padding: 0.6rem 1rem;
+  color: var(--text);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: background 0.3s, color 0.3s;
+  gap: 0.5rem;
+}
+
+.navbar-logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar-search {
+  flex: 1;
+  max-width: 300px;  /* max width on large screens */
+  min-width: 120px;  /* never shrink too small */
+}
+
+.navbar-search input {
+  width: 100%;
+  padding: 0.4rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.4rem;
+}
+
+.navbar-actions button {
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.9rem;
+  transition: background 0.3s, transform 0.2s;
+  white-space: nowrap; /* prevent text breaking */
+}
+
+.navbar-actions button:hover {
+  background: #1f7bd8;
+  transform: scale(1.05);
+}
+
+/* Responsive rules */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .navbar-search {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .navbar-actions button {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+.menu-btn {
+  display: none;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+/* Show menu button only on small screens */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: inline-block;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column; /* stack on very small screens */
+    align-items: stretch;
+  }
+
+  .navbar-search {
+    width: 100%;
+    order: 2; /* move search below logo */
+  }
+
+  .navbar-actions {
+    justify-content: center;
+    width: 100%;
+    order: 3;
+  }
+
+  .navbar-actions button {
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+}
+.navbar-actions .create-post-btn {
+  background-color: #ff5722;
+  color: #fff;
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.navbar-actions .create-post-btn:hover {
+  background-color: #e64a19;
+  transform: scale(1.05);
+}
